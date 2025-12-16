@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CX/DX 통합 자가진단 | 디지털 성숙도 평가</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- 시작 화면 -->
+    <section id="welcome-screen" class="screen active">
+        <div class="container">
+            <div class="welcome-content">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="45" stroke="currentColor" stroke-width="3" />
+                            <path d="M30 50 L45 65 L70 35" stroke="currentColor" stroke-width="4" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                    <h1>CX/DX 통합 자가진단</h1>
+                </div>
+
+                <p class="subtitle">고객경험과 디지털 전환 성숙도를 한 번에 진단하세요</p>
+
+                <div class="info-cards">
+                    <div class="info-card">
+                        <div class="info-icon">📊</div>
+                        <h3>10개 핵심 영역</h3>
+                        <p>CX 5개 + DX 5개 영역 종합 분석</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">⏱️</div>
+                        <h3>소요 시간</h3>
+                        <p>약 10-15분</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">📈</div>
+                        <h3>맞춤 제안</h3>
+                        <p>영역별 구체적 개선 방안 제공</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="industry-select">귀사의 산업군을 선택해주세요</label>
+                    <select id="industry-select" class="industry-select">
+                        <option value="manufacturing">제조업</option>
+                        <option value="service">서비스업</option>
+                        <option value="it">IT/소프트웨어</option>
+                        <option value="retail">유통/리테일</option>
+                        <option value="finance">금융/보험</option>
+                    </select>
+                </div>
+
+                <button id="start-btn" class="btn btn-primary btn-large">진단 시작하기</button>
+
+                <button id="history-btn" class="btn btn-secondary" style="display: none;">이전 결과 보기</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 진단 화면 -->
+    <section id="assessment-screen" class="screen">
+        <div class="container">
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span id="progress-text">1 / 60</span>
+                    <span id="category-text">CX · 고객 이해</span>
+                </div>
+                <div class="progress-bar">
+                    <div id="progress-fill" class="progress-fill"></div>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div class="question-card">
+                    <div class="question-header">
+                        <h2 id="question-text"></h2>
+                        <button class="tooltip-btn" id="tooltip-btn">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5" />
+                                <path d="M10 14V10M10 6H10.01" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div id="tooltip-text" class="tooltip-content"></div>
+
+                    <div class="rating-scale">
+                        <div class="rating-option">
+                            <input type="radio" id="rating-1" name="rating" value="1">
+                            <label for="rating-1">
+                                <span class="rating-number">1</span>
+                                <span class="rating-label">전혀<br>그렇지 않다</span>
+                            </label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="rating-2" name="rating" value="2">
+                            <label for="rating-2">
+                                <span class="rating-number">2</span>
+                                <span class="rating-label">그렇지<br>않다</span>
+                            </label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="rating-3" name="rating" value="3">
+                            <label for="rating-3">
+                                <span class="rating-number">3</span>
+                                <span class="rating-label">보통<br>이다</span>
+                            </label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="rating-4" name="rating" value="4">
+                            <label for="rating-4">
+                                <span class="rating-number">4</span>
+                                <span class="rating-label">그렇다</span>
+                            </label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="rating-5" name="rating" value="5">
+                            <label for="rating-5">
+                                <span class="rating-number">5</span>
+                                <span class="rating-label">매우<br>그렇다</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="navigation-buttons">
+                    <button id="prev-btn" class="btn btn-secondary" disabled>이전</button>
+                    <button id="next-btn" class="btn btn-primary" disabled>다음</button>
+                    <button id="submit-btn" class="btn btn-primary" style="display: none;" disabled>결과 보기</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 결과 화면 -->
+    <section id="result-screen" class="screen">
+        <div class="container">
+            <div id="result-content">
+                <div class="result-header">
+                    <h1>진단 결과</h1>
+                    <p id="result-date"></p>
+                </div>
+
+                <div class="score-summary">
+                    <div class="score-card overall">
+                        <h3>종합 점수</h3>
+                        <div class="score-value" id="overall-score">0</div>
+                        <div class="maturity-badge" id="overall-maturity"></div>
+                    </div>
+                    <div class="score-card cx">
+                        <h3>CX 성숙도</h3>
+                        <div class="score-value" id="cx-score">0</div>
+                        <div class="maturity-badge" id="cx-maturity"></div>
+                    </div>
+                    <div class="score-card dx">
+                        <h3>DX 성숙도</h3>
+                        <div class="score-value" id="dx-score">0</div>
+                        <div class="maturity-badge" id="dx-maturity"></div>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <h2>영역별 성숙도 분석</h2>
+                    <div class="chart-wrapper">
+                        <canvas id="radar-chart"></canvas>
+                    </div>
+                </div>
+
+                <div class="benchmark-section">
+                    <h2>산업군 벤치마크 비교</h2>
+                    <div id="benchmark-content"></div>
+                </div>
+
+                <div class="area-scores">
+                    <h2>영역별 상세 점수</h2>
+                    <div id="area-scores-content"></div>
+                </div>
+
+                <div class="priority-section">
+                    <h2>🎯 우선순위 개선과제</h2>
+                    <div id="priority-content"></div>
+                </div>
+
+                <div class="recommendations-section">
+                    <h2>💡 영역별 개선 제안</h2>
+                    <div id="recommendations-content"></div>
+                </div>
+
+                <div class="action-buttons">
+                    <button id="download-btn" class="btn btn-primary">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M10 12L6 8H9V3H11V8H14L10 12Z" fill="currentColor" />
+                            <path d="M3 14V16H17V14H18V17H2V14H3Z" fill="currentColor" />
+                        </svg>
+                        결과 다운로드
+                    </button>
+                    <button id="compare-btn" class="btn btn-secondary" style="display: none;">이전 결과와 비교</button>
+                    <button id="restart-btn" class="btn btn-secondary">재진단</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 비교 화면 -->
+    <section id="compare-screen" class="screen">
+        <div class="container">
+            <div class="result-header">
+                <h1>결과 비교</h1>
+                <button id="back-to-result-btn" class="btn btn-secondary">결과로 돌아가기</button>
+            </div>
+
+            <div class="comparison-container">
+                <div class="comparison-chart">
+                    <canvas id="comparison-chart"></canvas>
+                </div>
+
+                <div id="comparison-details"></div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+    <script src="pdf-download.js"></script>
+</body>
+
+</html>
